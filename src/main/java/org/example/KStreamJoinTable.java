@@ -9,7 +9,7 @@ import org.apache.kafka.streams.kstream.KTable;
 
 import java.util.Properties;
 
-public class kStreamJoinTable {
+public class KStreamJoinTable {
     private static final String APPLICATION_NAME = "order_join-application";
     private static final String BOOTSTRAP_SERVERS = "my-kafka:9092";
     private static final String ADDRESS_TABLE = "address";
@@ -27,7 +27,7 @@ public class kStreamJoinTable {
         KTable<String, String> addressTable = builder.table(ADDRESS_TABLE);
         KStream<String, String> orderStream = builder.stream(ORDER_STREAM);
 
-        orderStream.join(addressTable, (order, address) -> order + "send to " + address).to(ORDER_JOIN_STREAM);
+        orderStream.join(addressTable, (order, address) -> order + " send to " + address).to(ORDER_JOIN_STREAM);
 
         KafkaStreams streams = new KafkaStreams(builder.build(), properties);
         streams.start();
